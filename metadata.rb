@@ -5,7 +5,7 @@ license           "Apache 2.0"
 description       "Installs and configures nginx"
 version           "1.7.1"
 
-recipe "nginx", "Installs nginx package and sets up configuration with Debian apache style with sites-enabled/sites-available"
+recipe "nginx::default", "Installs nginx package and sets up configuration with Debian apache style with sites-enabled/sites-available"
 recipe "nginx::source", "Installs nginx from source and sets up configuration with Debian apache style with sites-enabled/sites-available"
 
 %w{ ubuntu debian centos redhat amazon scientific oracle fedora }.each do |os|
@@ -15,8 +15,6 @@ end
 %w{ build-essential yum apt runit }.each do |cb|
   depends cb
 end
-
-depends 'ohai', '>= 1.1.4'
 
 %w{ bluepill }.each do |cb|
   suggests cb
@@ -76,11 +74,6 @@ attribute "nginx/keepalive",
 attribute "nginx/keepalive_timeout",
   :display_name => "Nginx Keepalive Timeout",
   :default => "65"
-
-attribute "nginx/worker_processes",
-  :display_name => "Nginx Worker Processes",
-  :description => "Number of worker processes",
-  :default => "1"
 
 attribute "nginx/worker_connections",
   :display_name => "Nginx Worker Connections",
